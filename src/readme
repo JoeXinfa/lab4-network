@@ -4,3 +4,22 @@ gcc -o server.exe server.c -w
 ./server.exe
 gcc -o client.exe client.c -w
 ./client.exe
+
+# find IP address of website
+traceroute www.github.com
+
+# dump traffic on a network 
+sudo tcpdump -i any -w attack.pcap
+
+# steps for question 2
+1) $sudo tcpdump -i any -w attack.pcap
+2) launch server, ./server.exe
+3) launch client, ./client.exe
+4) client type message test
+5) $sudo python2 dosatt.py
+6) terminate the tcpdump
+7) use wireshark to view the pcap file
+
+# my questions
+1) in question 1, why does server must be run as root?
+2) do we need the 3.4GB VM image? which part?
