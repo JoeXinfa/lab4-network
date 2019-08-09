@@ -11,16 +11,22 @@ void func(int sockfd)
 { 
     char buff[MAX]; 
     int n; 
+    int isent = 0;
     for (;;) { 
-        bzero(buff, sizeof(buff)); 
-        printf("Enter the string : "); 
-        n = 0; 
-        while ((buff[n++] = getchar()) != '\n') 
-            ; 
-        write(sockfd, buff, sizeof(buff)); 
+        if (isent == 0) {
+            write(sockfd, "let us chat\n", sizeof(buff)); 
+	} else {
+            bzero(buff, sizeof(buff)); 
+            printf("Enter the string : "); 
+            n = 0; 
+            while ((buff[n++] = getchar()) != '\n') 
+                ; 
+            write(sockfd, buff, sizeof(buff)); 
+	}
         bzero(buff, sizeof(buff)); 
         read(sockfd, buff, sizeof(buff)); 
         printf("From Server : %s", buff); 
+	isent = isent + 1;
         if ((strncmp(buff, "exit", 4)) == 0) { 
             printf("Client Exit...\n"); 
             break; 
