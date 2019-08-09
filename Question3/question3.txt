@@ -1,0 +1,18 @@
+Record all steps of this question using tcpdump (see question 2). 
+1:Connect to the website http://www.baiwanzhan.com. 
+
+2:Enter in the search bar any word.
+
+3:Enter in the search bar the word 法轮.
+
+4:Use python to split the GET request up so that the word 法轮 is split up
+between two packets.
+
+Examine the packets from steps 2 and 3.
+- Open the pcap file with wireshark. 
+- Find the packet containing the GET request using the magnifying glass icon to
+  search for the benign word from step 2 above.
+- Secondary mouse click on the GET request packet and select Follow->TCP stream.
+- Observer the Time to Live (TTL) field in the packets sent from the server
+  from steps 2 and 3 (you may have to clear the search in wireshark to find the
+  packets associated with step 3).

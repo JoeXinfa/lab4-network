@@ -1,0 +1,7 @@
+Perform a Denial of Service (DOS) attack against the server created in question
+1. While performing the attack run `sudo  tcpdump -i any -w attack.pcap`.
+Spoof a return IP address so that the attack appears to come from somewhere
+other than localhost(127.0.0.1).
+
+To create packets for the DOS attack, you may find it helpful to  use python,
+scapy, or the scapy python library. 

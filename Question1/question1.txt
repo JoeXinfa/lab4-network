@@ -1,0 +1,5 @@
+Create both a client and server program in C. The server must take an input
+string and make each letter uppercase. The client must connect to the server
+and send a string. As as example see client.py and server.py. 
+
+Note that the server program must be run as root (root password is seed). 
