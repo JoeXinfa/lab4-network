@@ -1,0 +1,5 @@
+compile
+gcc -o server.exe server.c
+./server.exe
+gcc -o client.exe client.c
+./client.exe
