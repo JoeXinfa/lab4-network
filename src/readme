@@ -1,5 +1,6 @@
-compile
-gcc -o server.exe server.c
+# compile
+# gcc -w option to disable warning messages
+gcc -o server.exe server.c -w
 ./server.exe
-gcc -o client.exe client.c
+gcc -o client.exe client.c -w
 ./client.exe

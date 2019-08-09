@@ -2,12 +2,23 @@
 #include <netinet/in.h> 
 #include <stdlib.h> 
 #include <string.h> 
+#include <ctype.h>
 #include <sys/socket.h> 
 #include <sys/types.h> 
 #define MAX 80 
 #define PORT 8080 
 #define SA struct sockaddr 
   
+// Convert string to uppercase
+char *strupr(char *str) {
+    unsigned char *p = (unsigned char *) str;
+    while (*p) {
+        *p = toupper((unsigned char) *p);
+	p++;
+    }
+    return str;
+}
+
 // Function designed for chat between client and server. 
 void func(int sockfd) 
 { 
@@ -19,13 +30,17 @@ void func(int sockfd)
   
         // read the message from client and copy it in buffer 
         read(sockfd, buff, sizeof(buff)); 
+        printf("From client: %s", buff);
+	// convert client message to upper case
+	strupr(buff);
+        printf("\tTo client: %s", buff);
         // print buffer which contains the client contents 
-        printf("From client: %s\t To client : ", buff); 
-        bzero(buff, MAX); 
-        n = 0; 
+        //printf("From client: %s\t To client : ", buff); 
+        //bzero(buff, MAX); 
+        //n = 0; 
         // copy server message in the buffer 
-        while ((buff[n++] = getchar()) != '\n') 
-            ; 
+        //while ((buff[n++] = getchar()) != '\n') 
+        //    ; 
   
         // and send that buffer to client 
         write(sockfd, buff, sizeof(buff)); 
