@@ -12,14 +12,42 @@ traceroute www.github.com
 sudo tcpdump -i any -w attack.pcap
 
 # steps for question 2
-1) $sudo tcpdump -i any -w attack.pcap
+1) sudo tcpdump -i any -w attack.pcap
+   [sudo] password for seed: dees
 2) launch server, ./server.exe
 3) launch client, ./client.exe
 4) client type message test
-5) $sudo python2 dosatt.py
+5) sudo python2 dosatt.py
 6) terminate the tcpdump
 7) use wireshark to view the pcap file
 
 # my questions
 1) in question 1, why does server must be run as root?
++  For socket programming to non-localhost, usually need root
+   For testing on localhost, may not need root
 2) do we need the 3.4GB VM image? which part?
++  No, it is just for all the students having the same environment.
+3) create a packet, mimick the browser-generated packet
+4) what is the "%E6%B3%95%E8%BD%AE" encoding for 法轮
++  unicode
+   Use python to convert and confirm...
+   For question 3 step 4, it is one GET request! two packets?
+5) practice the Wireshark operations: search, follow > TCP stream
+   did I search correctly? What are the TCP stream?
+   where to find the TTL? how to interpret?
++  Wireshark shows all network traffics,
+   TCP stream is showing communication of the one client/server pair.
+   TTL = time to live, in the IP section (Wireshark see IP > TCP > HTTP)
+
+http://www.baiwanzhan.com/service/site/search.aspx?query=xinfazhu
+
+http://www.baiwanzhan.com/service/site/search.aspx?query=法轮
+http://www.baiwanzhan.com/service/site/search.aspx?query=%E6%B3%95%E8%BD%AE
+http://www.baiwanzhan.com/service/site/search.aspx?query=法
+http://www.baiwanzhan.com/service/site/search.aspx?query=%E6%B3%95
+http://www.baiwanzhan.com/service/site/search.aspx?query=轮
+http://www.baiwanzhan.com/service/site/search.aspx?query=%E8%BD%AE
+
+
+iptables -A OUTPUT -p tcp --tcp-flags RST RST -s <your-ip> -j DROP
+iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 127.0.0.1 -j DROP

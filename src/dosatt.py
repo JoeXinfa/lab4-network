@@ -1,26 +1,39 @@
-# python 2
+from scapy.all import IP, TCP, send, conf, L3RawSocket, sr1 
 
-from scapy.all import IP, TCP, send
+"""
+https://samsclass.info/123/proj14/p10-scapytcp.html
+
+# Drop all RST packets
+sudo iptables -F
+sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+sudo iptables -L
+
+sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -s <your-ip> -j DROP
+ifconfig # find your IP address
+sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 10.0.2.15 -j DROP
+
+# How to run and look
+sudo tcpdump -i any -w atest.pcap
+sudo python this.py
+Use Wireshark open the pcap file
+"""
 
 def main():
+    # This is required for traffic to localhost
+    conf.L3socket = L3RawSocket
 
-    # Example from lecture 2019/8/9
-    #p = IP(dst="slashdot.org")/TCP(dport=80)
-    #a = scapy.IP(dst="slashdot.org")/TCP(dport=80)/"GET /HTTP/1.0\r\n\r\n"
-    
-    source_IP = "140.82.113.4" # www.github.com
-    target_IP = "127.0.0.1" # localhost, the server
-    source_port = 1000
+    source_IP = "10.0.2.15" # spoof
+    target_IP = "127.0.0.1" # localhost
     target_port = 8080
     i = 1
 
     #while True:
     while i < 10:
-        source_port = 1000 * i
-        my_ip = IP(src = source_IP, dst = target_IP)
-	my_tcp = TCP(sport = source_port, dport = target_port)
+        my_ip = IP(src=source_IP, dst=target_IP)
+        #my_ip = IP(dst=target_IP)
+	my_tcp = TCP(sport=i, dport=target_port)
 	pkt = my_ip / my_tcp
-	send(pkt, inter = .001)
+        sr1(pkt)
 	print "packet sent", i
 	i = i + 1
 
