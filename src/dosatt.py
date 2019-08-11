@@ -28,7 +28,7 @@ def main():
     i = 1
 
     #while True:
-    while i < 10:
+    while i < 8000:
         my_ip = IP(src=source_IP, dst=target_IP)
         #my_ip = IP(dst=target_IP)
 	my_tcp = TCP(sport=i, dport=target_port)
