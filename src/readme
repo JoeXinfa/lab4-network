@@ -58,3 +58,11 @@ ifconfig
 iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 10.0.2.15 -j DROP
 
 Wireshark > open pcap > File > Export Objects > HTTP... > select > Save > my.html > Firefox > Ctrl+O > open my.html
+
+    # Stephan Garland, Robin Franklin
+    # pad = "z" * 1000
+    # req1 = sr(  query=fa  )
+    # time.sleep(1)
+    # req2 = sr(  lun  )
+    # req3 = sr(  /pad  )
+
