@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from scapy.all import IP, TCP, send, conf, L3RawSocket, sr1
 import os
 
@@ -25,8 +27,8 @@ def main():
     # This is required for traffic to localhost
     conf.L3socket = L3RawSocket
 
-    #my_ip = IP(dst="www.baiwanzhan.com")
-    my_ip = IP(dst="www.google.com")
+    my_ip = IP(dst="www.baiwanzhan.com")
+    #my_ip = IP(dst="www.google.com")
     my_tcp = TCP(dport=80)
 
     pkt = my_ip / my_tcp
@@ -38,10 +40,14 @@ def main():
     my_tcp.flags = 'AP'
     #my_tcp.show()
 
-    #get_str = "GET / HTTP/1.1\r\nHost: www.baiwanzhan.com/service/site/search.aspx?query=%E6%96%B9%E6%B3%95 \r\n"
-    #get_str = "GET / HTTP/1.1\r\nHost: www.baiwanzhan.com/service/site/search.aspx?query=water \r\n"
-    get_str = "GET / HTTP/1.1\r\nHost: www.google.com \r\n\r\n"
-    #get_str = "GET /service/site/search.aspx?query=water HTTP/1.1 \r\n\r\n"
+    #get_str = "GET / HTTP/1.1\r\nHost: www.google.com \r\n\r\n"
+    get_str = "GET /service/site/search.aspx?query=方法 HTTP/1.1\r\n" \
+        "Host: www.baiwanzhan.com\r\n" \
+	"\r\n"
+#	"User-Agent: Python-Scapy\r\n" \
+#	"Accept:*/*\r\n" \
+#	"Connection: keep-alive\r\n" \
+    print get_str
 
     request = my_ip / my_tcp / get_str
     reply = sr1(request)
