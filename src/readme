@@ -48,6 +48,13 @@ http://www.baiwanzhan.com/service/site/search.aspx?query=%E6%B3%95
 http://www.baiwanzhan.com/service/site/search.aspx?query=轮
 http://www.baiwanzhan.com/service/site/search.aspx?query=%E8%BD%AE
 
+方法
+http://www.baiwanzhan.com/service/site/search.aspx?query=%E6%96%B9%E6%B3%95
 
 iptables -A OUTPUT -p tcp --tcp-flags RST RST -s <your-ip> -j DROP
+localhost
 iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 127.0.0.1 -j DROP
+ifconfig
+iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 10.0.2.15 -j DROP
+
+Wireshark > open pcap > File > Export Objects > HTTP... > select > Save > my.html > Firefox > Ctrl+O > open my.html
