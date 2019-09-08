@@ -1,4 +1,5 @@
 import socket
+import time
 
 host = "www.baiwanzhan.com"
 port = 80
@@ -28,6 +29,7 @@ def main():
         client.send(req)
         resp = client.recv(4096)
         responses.append(repr(resp))
+	time.sleep(15)
 
 if __name__ == "__main__":
     main()
